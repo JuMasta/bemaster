@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM python:3.9-alpine
+RUN sudo apt update ; sudo apt install software-properties-common ; sudo add-apt-repository ppa:deadsnakes/ppa ; sudo apt update  ; sudo apt install python3.9
 WORKDIR .
 COPY . .
 RUN pip3 install -r requirements.txt
