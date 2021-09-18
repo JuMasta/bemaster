@@ -1,7 +1,8 @@
 # syntax=docker/dockerfile:1
-FROM scratch
-RUN sudo apt update ; sudo apt install software-properties-common ; sudo add-apt-repository ppa:deadsnakes/ppa ; sudo apt update  ; sudo apt install python3.9
-WORKDIR .
+FROM python:3.9
 COPY . .
 RUN pip3 install -r requirements.txt
-CMD ["python3", "manage.py" ,"runserver","185.46.8.254:80"]
+RUN python3 manage.py migrate
+RUN python3 manage.py makemigrations
+RUN python manage.py shell < createsuperuser.py 
+CMD ["python3", "manage.py" ,"runserver","0.0.0.0:80"]
