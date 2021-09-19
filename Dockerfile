@@ -1,8 +1,12 @@
-# syntax=docker/dockerfile:1
+#docker/dockerfile:1
 FROM python:3.9
-COPY . .
+ARG superuser=admin
+ARG password=admin
+ARG email=admin
+ENV DJANGO_SUPERUSER_USERNAME=${superuser}
+ENV DJANGO_SUPERUSER_PASSWORD=${password}
+ENV DJANGO_SUPERUSER_EMAIL=${email}
+COPY . /app
+WORKDIR /app
 RUN pip3 install -r requirements.txt
-RUN python3 manage.py migrate
-RUN python3 manage.py makemigrations
-RUN python manage.py shell < createsuperuser.py 
-CMD ["python3", "manage.py" ,"runserver","0.0.0.0:80"]
+ENTRYPOINT ["./entrypoint.sh"]
