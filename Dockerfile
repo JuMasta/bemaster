@@ -2,7 +2,7 @@
 FROM python:3.9
 ARG superuser=admin
 ARG password=admin
-ARG email
+ARG email=nikbulat97@mail.ru
 ENV DJANGO_SUPERUSER_USERNAME=${superuser}
 ENV DJANGO_SUPERUSER_PASSWORD=${password}
 ENV DJANGO_SUPERUSER_EMAIL=${email}
